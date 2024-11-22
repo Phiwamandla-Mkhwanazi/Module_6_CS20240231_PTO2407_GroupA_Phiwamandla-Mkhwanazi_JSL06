@@ -1,14 +1,21 @@
 // Sample menu data (Consider fetching this data from a server in a real-world scenario)
 const menu = {
-    Starters: ["Garlic Bread", "Bruschetta"],
-    MainCourses: ["Margherita Pizza", "Spaghetti Carbonara"],
-    Desserts: ["Tiramisu", "Cheesecake"]
+    Starters: [
+                { name: "Garlic Bread", price: 60},{ name: "Bruschetta", price: 60}
+            ],
+    MainCourses: [
+                {name: "Margherita Pizza", price: 60}, {name: "Spaghetti Carbonara", price:60}
+            ],
+    Desserts: [
+                {name: "Tiramisu", price: 60}, { name: "Cheesecake", price: 60}
+            ]
 };
 
 
 
 // Function to display menu items by category
-function displayMenuItems(menu) {
+function displayMenuItems(menu) 
+{
     // Get the menu container element from the HTML
     elMenu = document.getElementById('menu');
     elMenu.classList.add('menu');
@@ -16,7 +23,7 @@ function displayMenuItems(menu) {
     // Loop through each category and its items in the menu object
    for( const category in menu)
     {
-        const items =  menu[category];
+        const itemNames =  menu[category];
 
         // Create an element to represent the category
         let elCategory = document.createElement('div');  
@@ -35,27 +42,28 @@ function displayMenuItems(menu) {
  
  
         // Loop through the items in the category and create list items
-        for(let i = 0; i < items.length; i++)
-        {
+        itemNames.forEach(itemName => 
+            {
             // Create a list item element
             let elItem = document.createElement('li');
  
             // Set the text content of the list item element to the item name
-            elItem.textContent = `${items[i]}`;
+            elItem.textContent = `${itemName.name}`;
 
             // Attach a click event listener to the list item to add it to the order
             elItem.addEventListener('click', ()=> {
-                                                    console.log(`${items[i]}`);
-                                                    addToOrder(items[i]);
+                                                    console.log(`${itemName.name}`);
+                                                    addToOrder(itemName);
                                                 });
 
             // Append the list item to the list of items
             elList.appendChild(elItem);
-        }
-           
+            });
     }
-            
+        
 }
+
+let total = 0;
 
 // Callback function for adding an item to the order
 function addToOrder(itemName) {
@@ -67,16 +75,16 @@ function addToOrder(itemName) {
     let elListItem = document.createElement('li');
             
     // Set the text content of the list item to the item name
-    elListItem.textContent = `${itemName}`;
+    elListItem.textContent = `${itemName.name}`;
     
     // Append the list item to the order items list
     elOrderItems.append(elListItem);
     
     // Calculate and update the total price
-    
+    total += itemName.price;
 
     // Update the text content of the order total element with the new total
-
+    elOrderTotal.textContent = `${total}`;
 }
 
 
