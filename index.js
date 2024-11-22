@@ -26,13 +26,17 @@ function displayMenuItems(menu)
         const itemNames =  menu[category];
 
         // Create an element to represent the category
-        let elCategory = document.createElement('div');  
+        let elCategory = document.createElement('div');
+        elCategory.classList.add('category');  
         
         // Set the text content of the category element to the category name
-        elCategory.textContent = `${category}`;
+        const elCategoryHeader = document.createElement('h3');
+        elCategoryHeader.textContent = category;
+        elCategory.appendChild(elCategoryHeader);
  
         // Append the category element to the menu container
         elMenu.appendChild(elCategory);
+      
  
         // Create an element to represent a list of items
         let elList = document.createElement('ul');
@@ -73,14 +77,15 @@ const addToOrder =(() =>
     function addToOrder(itemName) 
     {
     // Get the order items list and the order total element from the HTML
-     const elOrderItems = document.querySelector('#order-items');
+     const elOrderItems = document.querySelector('#order-items'); 
      const elOrderTotal = document.getElementById('order-total');
+     elOrderTotal.classList.add('order-total');
 
     // Create a list item for the order
     let elListItem = document.createElement('li');
             
     // Set the text content of the list item to the item name
-    elListItem.textContent = `${itemName.name}`;
+    elListItem.textContent = itemName.name;
     
     // Append the list item to the order items list
     elOrderItems.append(elListItem);
@@ -89,7 +94,7 @@ const addToOrder =(() =>
     total += itemName.price;
 
     // Update the text content of the order total element with the new total
-    elOrderTotal.textContent = `${total}`;
+    elOrderTotal.textContent = total;
     }
     return addToOrder;
 })();
