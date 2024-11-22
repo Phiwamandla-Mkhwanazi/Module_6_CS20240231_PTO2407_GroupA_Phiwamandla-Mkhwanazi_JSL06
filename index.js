@@ -63,10 +63,15 @@ function displayMenuItems(menu)
         
 }
 
-let total = 0;
 
-// Callback function for adding an item to the order
-function addToOrder(itemName) {
+
+const addToOrder =(() => 
+{
+    let total = 0;
+
+    // Callback function for adding an item to the order
+    function addToOrder(itemName) 
+    {
     // Get the order items list and the order total element from the HTML
      const elOrderItems = document.querySelector('#order-items');
      const elOrderTotal = document.getElementById('order-total');
@@ -85,7 +90,11 @@ function addToOrder(itemName) {
 
     // Update the text content of the order total element with the new total
     elOrderTotal.textContent = `${total}`;
-}
+    }
+    return addToOrder;
+})();
+
+
 
 
 // Function to initialize the menu system
